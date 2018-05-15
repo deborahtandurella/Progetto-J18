@@ -1,4 +1,5 @@
 public class Rivista {
+    /**/
     private String IDrivista;
     private String nomeR;
     private Categoria categoria;
