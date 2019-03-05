@@ -33,4 +33,9 @@ public class Rivista {
     public Periodo getPeriodo() {
         return periodo;
     }
+
+    public boolean inserisciRivista(Rivista R)
+        {
+            R.getCategoria();
+        }
 }
