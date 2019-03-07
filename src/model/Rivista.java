@@ -1,3 +1,5 @@
+package model;
+
 public class Rivista {
     /**/
     private String IDrivista;
@@ -34,8 +36,5 @@ public class Rivista {
         return periodo;
     }
 
-    public boolean inserisciRivista(Rivista R)
-        {
-            R.getCategoria();
-        }
+
 }
