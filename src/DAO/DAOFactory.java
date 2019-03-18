@@ -1,22 +1,51 @@
-package dao;
+package DAO;
 
-/**
- * DaoFactory Class
- */
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
-public class DaoFactory {
+public class DAOFactory {
 
+    public static final String DRIVER = "com.mysql.jdbc.Driver";
+    /**
+     * L'url al database
+     */
+    public static final String DBURL = "jdbc:mysql://127.0.0.1:3306/progettoj18";
+    /**
+     * Lo username per le operazioni sul DB
+     */
+    public static final String USER = "root";
+    /**
+     * La password per le operazioni sul DB
+     */
+    public static final String PASS = "root";
 
-    static DaoFactory instance;
-    private String url;
-    private String username;
-    private String password;
-    private String Driver;
+    /**
+     * Metodo per creare una connessione sul DB MySQL
+     *
+ * @return l'oggetto Connection.
+     */
 
-
-    private DaoFactory(String url, String username, String password) {
-        this.url = url;
-        this.username = username;
-        this.password = password;
+    public static Connection createConnection() {
+        Connection conn = null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            conn = DriverManager.getConnection(DBURL, USER, PASS);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return conn;
     }
+
+    public Connection getConnection() throws SQLException {
+
+        DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+
+        return DriverManager.getConnection(DBURL,USER,PASS);
+
+
+    }
+
 }
