@@ -1,7 +1,8 @@
-
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>login form</title>
+    <meta charset="UTF-8">
+    <title>Login</title>
 </head>
 <body>
 <form method="post" action="login">

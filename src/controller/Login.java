@@ -1,6 +1,6 @@
 package controller;
 
-import dao.DAOValidate;
+import dao.DAOCliente;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,7 +20,7 @@ public class Login extends HttpServlet {
         String username = request.getParameter("username");
         String pass = request.getParameter("pass");
 
-        if (DAOValidate.Validate(username, pass)) {
+        if (DAOCliente.Validate(username, pass)) {
             RequestDispatcher rs = request.getRequestDispatcher("Welcome");
             rs.forward(request, response);
         } else {
