@@ -1,4 +1,4 @@
-package dao;
+package DAO;
 
 import model.Cliente;
 
@@ -9,7 +9,7 @@ import java.sql.Statement;
 //Classe per settare la connesione con il database
 public class DAOCliente {
 
-    private static DAOFactory Dao;
+    private static DAO.DAOFactory Dao;
 
     public static boolean Validate(String username, String pass) {
 
