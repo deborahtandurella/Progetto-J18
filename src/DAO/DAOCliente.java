@@ -16,7 +16,7 @@ public class DAOCliente {
 
         boolean v = false;
         try {
-            Connection connection = Dao.getConnection();
+            Connection connection = Dao.createConnection();
             Statement st = connection.createStatement();
             String query = String.format("SELECT * FROM users WHERE username=useername AND pass=pass");
             st.execute(query);
@@ -28,7 +28,7 @@ public class DAOCliente {
 
     public void save(Cliente customer) {
         try {
-            Connection connection = Dao.getConnection();
+            Connection connection = Dao.createConnection();
             Statement st = connection.createStatement();
             String query = String.format("insert into users (USERNAME,PASS,NOME,COGNOME,INDIRIZZO,DATANASCITA,EMAIL) values (?,?,?,?,?,?,?)",
                     customer.getUsername(), customer.getPassword(), customer.getNome(), customer.getCognome(), customer.getIndirizzo(),

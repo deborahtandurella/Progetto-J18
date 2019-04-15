@@ -1,6 +1,6 @@
 package controller;
 
-import dao.DAOCliente;
+import DAO.DAOCliente;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
