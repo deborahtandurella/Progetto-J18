@@ -18,7 +18,7 @@ public class DAOFactory {
     /**
      * La password per le operazioni sul DB
      */
-    public static final String PASS = "root";
+    public static final String PASS = "3964544ahmed";
 
     /**
      * Metodo per creare una connessione sul DB MySQL
@@ -39,13 +39,6 @@ public class DAOFactory {
         return conn;
     }
 
-    public Connection getConnection() throws SQLException {
 
-        DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-
-        return DriverManager.getConnection(DBURL,USER,PASS);
-
-
-    }
 
 }
