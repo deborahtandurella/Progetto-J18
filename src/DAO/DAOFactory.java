@@ -31,6 +31,7 @@ public class DAOFactory {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(DBURL, USER, PASS);
+
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
