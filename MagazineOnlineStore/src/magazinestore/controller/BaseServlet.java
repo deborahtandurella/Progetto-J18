@@ -21,7 +21,7 @@ public class BaseServlet extends HttpServlet {
 	}
 	@Override
 	public void init() throws ServletException {
-		entityManagerFactory = Persistence.createEntityManagerFactory("MagazineOnlineStore");
+		entityManagerFactory = Persistence.createEntityManagerFactory("Progetto-J18");
 	    entityManager = entityManagerFactory.createEntityManager();
 	}
     

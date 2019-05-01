@@ -12,7 +12,7 @@ public class UsersTest {
         utente1.setFullName("Prova 3");
         utente1.setPassword("ssd78s");
 
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("MagazineOnlineStore");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Progetto-J18");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         entityManager.getTransaction().begin();

@@ -104,7 +104,7 @@ public class CategoryServices {
 
 	public void deleteCategory() throws ServletException, IOException {
 		int categoryId = Integer.parseInt(request.getParameter("id"));
-		categoryDAO.delete(categoryId);
+		//categoryDAO.delete(categoryId);
 		
 		String message;
 		

@@ -13,7 +13,7 @@ public class BaseDAOTest {
 
     @BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		entityManagerFactory = Persistence.createEntityManagerFactory("MagazineOnlineStore");
+		entityManagerFactory = Persistence.createEntityManagerFactory("Progetto-J18");
         entityManager = entityManagerFactory.createEntityManager();
 	}
     
