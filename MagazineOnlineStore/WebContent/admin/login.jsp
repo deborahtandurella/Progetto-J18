@@ -3,15 +3,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Admin Login</title>
+	<meta charset="ISO-8859-1">
+	<title>Admin Login</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script type="text/javascript" src="../js/jquery-3.4.0.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.validate.min.js"></script>
+
 </head>
 <body>
 	<div align="center">
-		<h1>Amministrazione Riviste Store</h1>
+		<h1>Amministrazione Riviste Online</h1>
 		<h2>Admin Login</h2>
 		
-		<form id="formLogin" action="Login" method="post">
+		<form id="loginForm" action="login" method="post">
 			<table>
 				<tr>
 					<td>Email:</td>
@@ -31,4 +35,29 @@
 		</form>
 	</div>
 </body>
+
+<script type="text/javascript">
+
+	$(document).ready(function () {
+		$("#loginForm").validate({
+			rules: {
+				email: {
+					required: true,
+					email: true
+				},
+				password: "required",
+			},
+			
+			messages: {
+				email: {
+					required: " Inserisci email",
+					email: " Inserisci indirizzo email valido"
+				},
+					password: " Inserisci password"
+			}
+		});
+		
+	});
+	
+</script>
 </html>

@@ -3,7 +3,10 @@ package magazinestore.dao;
 import magazinestore.entity.Utenti;
 
 import javax.persistence.EntityManager;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UserDAO extends JpaDAO<Utenti> implements GenericDAO<Utenti> {
     public UserDAO(EntityManager entityManager) {
@@ -33,6 +36,19 @@ public class UserDAO extends JpaDAO<Utenti> implements GenericDAO<Utenti> {
 		}
 		
 		return null;
+    }
+    
+    public boolean checkLogin(String email, String password) {
+    	Map<String, Object> parameters = new HashMap<>();
+    	parameters.put("email", email);
+    	parameters.put("password", password);
+    	
+    	List<Utenti> listUsers = super.findWithNamedQuery("Users.checkLogin", parameters);
+    	
+    	if (listUsers.size() == 1) {
+			return true;
+		}
+    	return false;
     }
 
     @Override

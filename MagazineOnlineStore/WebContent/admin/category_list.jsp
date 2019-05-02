@@ -9,6 +9,8 @@
     <meta http-equiv="Content-Type" content="text/html" charset="ISO-8859-1">
     <title>Gestire le categorie - MagazineStore Administration</title>
     <link rel="stylesheet" href="../css/style.css">
+    <script type="text/javascript" src="../js/jquery-3.4.0.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.validate.min.js"></script>
     
 </head>
 <body>
@@ -43,7 +45,7 @@
                     <td>${cat.name}</td>
                     <td>
                     	<a href="edit_category?id=${cat.categoriaId}">Modifica</a>
-                    	<a href="javascript:confirmDelete(${cat.categoriaId})">Elimina</a>
+                    	<a href="javascript:void(0)" class="deleteLink" id="${cat.categoriaId}">Elimina</a>
                     </td>
                 </tr>
             </c:forEach>
@@ -56,11 +58,16 @@
 	<jsp:directive.include file="footer.jsp" />	
 	
 	<script type="text/javascript">
-		function confirmDelete(categoriaId) {
-			if(confirm("Sei sicuro di eliminare la categoria con ID: " + categoriaId + "?"))	{
-				window.location = 'delete_category?id=' + categoriaId;
-			}	
-		}
+	$(document).ready(function () {
+		$(".deleteLink").each(function () {
+			$(this).on("click", function () {
+				categoriaId= $(this).attr("id");
+				if(confirm("Sei sicuro di eliminare la categoria con ID: " + categoriaId + "?"))	{
+					window.location = 'delete_category?id=' + categoriaId;
+				}	
+			});		
+		});
+	});
 	</script>
 </body>
 </html>

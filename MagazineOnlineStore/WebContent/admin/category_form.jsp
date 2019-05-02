@@ -15,6 +15,8 @@
 
 </title>
     <link rel="stylesheet" href="../css/style.css">
+    <script type="text/javascript" src="../js/jquery-3.4.0.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.validate.min.js"></script>
 
 </head>
 <body>
@@ -33,12 +35,12 @@
 
     <div align="center">
     	<c:if test="${category != null}">
-    		<form action="update_category" method="post" onsubmit="return validateFormInput();">
+    		<form action="update_category" method="post" id="categoryForm">
     		<input type="hidden" name="categoriaId" value="${category.categoriaId}">
     	</c:if>
     	
     	<c:if test="${category == null}">
-    		<form action="create_category" method="post" onsubmit="return validateFormInput();">
+    		<form action="create_category" method="post" id="categoryForm">
     	</c:if>
     	
 			<table class="form">
@@ -51,7 +53,7 @@
       			<tr>
       				<td colspan="2" align="center">
       					<button type="submit">Salva</button>&nbsp;&nbsp;&nbsp;
-      					<button onclick="javascript:history.go(-1);">Cancella</button>
+      					<button id="buttonCancel">Cancella</button>
       				</td>
       			</tr>
       		</table>
@@ -61,17 +63,20 @@
 </body>
 
 <script type="text/javascript">
-	function validateFormInput() {
-		var fieldName = document.getElementById("name");
+$(document).ready(function () {
+	$("#categoryForm").validate({
+		rules: {
+			name: "required",
+		},
 		
-		if (fieldName.value.length == 0) {
-			alert("Campo Nome OBBLIGATORIO");
-			fieldName.focus();
-			return false;
+		messages: {
+			name: " Inserisci nome categoria",
 		}
-			
-		return true;
-	}
+	});
+	$("#buttonCancel").click(function () {
+		history.go(-1);
+	});
+});
 </script>
 
 

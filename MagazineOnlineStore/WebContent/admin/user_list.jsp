@@ -9,7 +9,8 @@
     <meta http-equiv="Content-Type" content="text/html" charset="ISO-8859-1">
     <title>Gestire gli Utenti - MagazineStore Administration</title>
     <link rel="stylesheet" href="../css/style.css">
-    
+    <script type="text/javascript" src="../js/jquery-3.4.0.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.validate.min.js"></script>
 </head>
 <body>
 <jsp:directive.include file="/admin/header.jsp" />
@@ -45,7 +46,7 @@
                     <td>${user.fullName}</td>
                     <td>
                     	<a href="edit_user?id=${user.userId}">Modifica</a>
-                    	<a href="javascript:confirmDelete(${user.userId})">Elimina</a>
+                    	<a href="javascript:void(0)" class="deleteLink" id="${user.userId}">Elimina</a>
                     </td>
                 </tr>
             </c:forEach>
@@ -57,12 +58,18 @@
 
 	<jsp:directive.include file="footer.jsp" />	
 	
-	<script type="text/javascript">
-		function confirmDelete(userId) {
-			if(confirm("Sei sicuro di eliminare utente con ID: " + userId + "?"))	{
-				window.location = 'delete_user?id=' + userId;
-			}	
-		}
+	<script>
+		$(document).ready(function () {
+			$(".deleteLink").each(function () {
+				$(this).on("click", function () {
+					userId= $(this).attr("id");
+					if(confirm("Sei sicuro di eliminare utente con ID: " + userId + "?"))	{
+						window.location = 'delete_user?id=' + userId;
+					}	
+				});		
+			});
+		});
+		
 	</script>
 </body>
 </html>

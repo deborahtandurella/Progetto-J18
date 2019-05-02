@@ -4,9 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http- charset="ISO-8859-1">
-<title>Creare Nuovo Utente</title>
+	<meta http- charset="ISO-8859-1">
+	<title>Creare Nuovo Utente</title>
     <link rel="stylesheet" href="../css/style.css">
+    <script type="text/javascript" src="../js/jquery-3.4.0.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.validate.min.js"></script>
+ 
 
 </head>
 <body>
@@ -25,15 +28,14 @@
 
     <div align="center">
     	<c:if test="${user != null}">
-    		<form action="update_user" method="post" onsubmit="return validateFormInput();">
+    		<form action="update_user" method="post" id="userForm">
     		<input type="hidden" name="userId" value="${user.userId}">
     	</c:if>
     	
     	<c:if test="${user == null}">
-    		<form action="create_user" method="post" onsubmit="return validateFormInput();">
+    		<form action="create_user" method="post" id="userForm">
     	</c:if>
     	
-		 <form action="create_user" method="post" onsubmit="return validateFormInput();"> 
 			<table class="form">
       			<tr>
       				<td align="right">Email:</td>
@@ -51,7 +53,7 @@
       			<tr>
       				<td colspan="2" align="center">
       					<button type="submit">Salva</button>&nbsp;&nbsp;&nbsp;
-      					<button onclick="javascript:history.go(-1);">Cancella</button>
+      					<button id="buttonCancel">Cancella</button>
       				</td>
       			</tr>
       		</table>
@@ -62,31 +64,33 @@
 </body>
 
 <script type="text/javascript">
-	function validateFormInput() {
-		var fieldEmail = document.getElementById("email");
-		var fieldfullname = document.getElementById("fullname");
-		var fieldpassword = document.getElementById("password");
-		
-		if (fieldEmail.value.length == 0) {
-			alert("Campo Email OBBLIGATORIO");
-			fieldEmail.focus();
-			return false;
-		}
-		
-		if (fieldfullname.value.length == 0) {
-			alert("Campo Full Name OBBLIGATORIO");
-			fieldEmail.focus();
-			return false;
-		}
-		
-		if (fieldpassword.value.length == 0) {
-			alert("Campo Password OBBLIGATORIO");
-			fieldEmail.focus();
-			return false;
-		}
-		
-		return true;
-	}
+
+	$(document).ready(function () {
+		$("#userForm").validate({
+			rules: {
+				email: {
+					required: true,
+					email: true
+				},
+				fullname: "required",
+				password: "required",
+			},
+			
+			messages: {
+				email: {
+					required: " Inserisci email",
+					email: " Inserisci indirizzo email valido"
+				},
+				
+				fullname: " Inserisci nome completo",
+				password: " Inserisci password"
+			}
+		});
+		$("#buttonCancel").click(function () {
+			history.go(-1);
+		})
+	});
+	
 </script>
 
 
