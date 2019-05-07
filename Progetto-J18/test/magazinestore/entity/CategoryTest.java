@@ -8,7 +8,7 @@ import javax.persistence.Persistence;
 
 public class CategoryTest {
     public static void main(String[] args) {
-        Categoria categoriaEntity = new Categoria("more more 	 Java");
+        Categoria categoriaEntity = new Categoria("more more Java");
 
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Progetto-J18");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
