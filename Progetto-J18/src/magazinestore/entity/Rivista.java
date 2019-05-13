@@ -1,6 +1,8 @@
 package magazinestore.entity;
 // Generated 27-apr-2019 19.55.30 by Hibernate Tools 5.2.12.Final
 
+import java.beans.Transient;
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,6 +14,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -23,14 +27,19 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "rivista", catalog = "magazinestoredb", uniqueConstraints = @UniqueConstraint(columnNames = "title"))
+@NamedQueries({
+	@NamedQuery(name = "Rivista.findAll", query = "SELECT r FROM Rivista r"),
+	@NamedQuery(name = "Rivista.findByTitle", query = "SELECT r FROM Rivista r where r.title =:title"),
+	@NamedQuery(name = "Rivista.countAll", query = "SELECT COUNT(*) FROM Rivista r"),
+})
 public class Rivista implements java.io.Serializable {
 
-	private Integer revistaId;
+	private Integer rivistaId;
 	private Categoria categoria;
 	private String title;
-	private String author;
 	private String description;
 	private byte[] immagine;
+	private String base64Image;
 	private String price;
 	private Date publishDate;
 	private Date lastUpdtaedTime;
@@ -40,11 +49,10 @@ public class Rivista implements java.io.Serializable {
 	public Rivista() {
 	}
 
-	public Rivista(Categoria categoria, String title, String author, String description, byte[] immagine, String price,
+	public Rivista(Categoria categoria, String title, String description, byte[] immagine, String price,
 			Date publishDate, Date lastUpdtaedTime) {
 		this.categoria = categoria;
 		this.title = title;
-		this.author = author;
 		this.description = description;
 		this.immagine = immagine;
 		this.price = price;
@@ -52,11 +60,10 @@ public class Rivista implements java.io.Serializable {
 		this.lastUpdtaedTime = lastUpdtaedTime;
 	}
 
-	public Rivista(Categoria categoria, String title, String author, String description, byte[] immagine, String price,
+	public Rivista(Categoria categoria, String title,String description, byte[] immagine, String price,
 			Date publishDate, Date lastUpdtaedTime, Set<Recensione> recensiones, Set<DettagliOrdine> dettagliOrdines) {
 		this.categoria = categoria;
 		this.title = title;
-		this.author = author;
 		this.description = description;
 		this.immagine = immagine;
 		this.price = price;
@@ -70,12 +77,12 @@ public class Rivista implements java.io.Serializable {
 	@GeneratedValue(strategy = IDENTITY)
 
 	@Column(name = "revista_id", unique = true, nullable = false)
-	public Integer getRevistaId() {
-		return this.revistaId;
+	public Integer getRivistaId() {
+		return this.rivistaId;
 	}
 
-	public void setRevistaId(Integer revistaId) {
-		this.revistaId = revistaId;
+	public void setRivistaId(Integer rivistaId) {
+		this.rivistaId = rivistaId;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -95,15 +102,6 @@ public class Rivista implements java.io.Serializable {
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	@Column(name = "author", nullable = false, length = 64)
-	public String getAuthor() {
-		return this.author;
-	}
-
-	public void setAuthor(String author) {
-		this.author = author;
 	}
 
 	@Column(name = "description", nullable = false, length = 16777215)
@@ -170,5 +168,15 @@ public class Rivista implements java.io.Serializable {
 	public void setDettagliOrdines(Set<DettagliOrdine> dettagliOrdines) {
 		this.dettagliOrdines = dettagliOrdines;
 	}
-
+	
+	@Transient
+	public String getBase64Image() {
+		this.base64Image = Base64.getEncoder().encodeToString(this.immagine);
+		return base64Image;
+	}
+	@Transient
+	public void setBase64Image(String base64) {
+		
+		this.base64Image=base64;
+	}
 }

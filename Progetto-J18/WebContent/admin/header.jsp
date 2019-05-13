@@ -20,7 +20,7 @@
     		</a>
    		</div>
 		<div>
-    		<a href="magazines">
+    		<a href="list_magazines">
     			<img src="../images/magazine.png" height="55" width="66"/><br>Riviste
     		</a>
    		</div>
