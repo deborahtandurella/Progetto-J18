@@ -168,7 +168,7 @@ public class Rivista implements java.io.Serializable {
 	public void setDettagliOrdines(Set<DettagliOrdine> dettagliOrdines) {
 		this.dettagliOrdines = dettagliOrdines;
 	}
-	
+	/*
 	@Transient
 	public String getBase64Image() {
 		this.base64Image = Base64.getEncoder().encodeToString(this.immagine);
@@ -178,5 +178,5 @@ public class Rivista implements java.io.Serializable {
 	public void setBase64Image(String base64) {
 		
 		this.base64Image=base64;
-	}
+	}*/
 }

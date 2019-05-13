@@ -1,5 +1,7 @@
 package magazinestore.dao;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
@@ -57,5 +59,6 @@ public class RivistaDAO extends JpaDAO<Rivista> implements GenericDAO<Rivista> {
 		
 		return super.countWithNamedQuery("Rivista.countAll");
 	}
+	
 
 }

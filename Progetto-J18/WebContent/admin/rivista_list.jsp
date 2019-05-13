@@ -16,7 +16,7 @@
 <jsp:directive.include file="/admin/header.jsp" />
     <div align="center">
         <h2 class="pageheading">Gestione Riviste</h2>
-        <h3><a href="rivista_form.jsp">Crea nuova Rivista</a></h3>
+        <h3><a href="new_rivista">Crea nuova Rivista</a></h3>
     </div>
     
     <c:if test="${message != null}">
@@ -48,6 +48,7 @@
                     <td>${rivista.rivistaId}</td>
                     
                   <td>
+            
                     </td>
                     <td>${rivista.title}</td>
                     <td>${rivista.categoria.name}</td>
