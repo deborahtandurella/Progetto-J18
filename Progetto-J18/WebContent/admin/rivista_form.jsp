@@ -7,9 +7,11 @@
 	<meta http- charset="ISO-8859-1">
 	<title>Nuova Rivista</title>
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/jquery-ui.min.css">
     <script type="text/javascript" src="../js/jquery-3.4.0.min.js"></script>
 	<script type="text/javascript" src="../js/jquery.validate.min.js"></script>
- 
+ 	<script type="text/javascript" src="../js/jquery-ui.min.js"></script>
+
 
 </head>
 <body>
@@ -60,7 +62,9 @@
       			</tr>
       			<tr>
       				<td align="right">Rivista Immaggine:</td>
-      				<td align="left"><input type="file" id="RivistaImage" name="RivistaImage" size="20"/></td>
+      				<td align="left"><input type="file" id="RivistaImage" name="RivistaImage" size="20"/><br/>
+      				<img id="thumbnail" alt="Image Preview" style="width:20%;margin-top:10px"/>
+      				</td>
       			</tr>
       				<tr>
       				<td align="right">Prezzo:</td>
@@ -90,6 +94,10 @@
 <script type="text/javascript">
 
 	$(document).ready(function () {
+		$('#publishDate').datepicker();
+		$('#RivistaImage').change(function(){
+			showImageThumbnail(this);
+		});
 		$("#userForm").validate({
 			rules: {
 				email: {
@@ -114,7 +122,14 @@
 			history.go(-1);
 		})
 	});
-	
+	function showImageThumbnail(fileInput){
+		var file = fileInput.files[0];
+		var reader= new FileReader();
+		reader.onload=function(e){
+			$('thumbnail').attr('src',e.target.result);
+		};
+		reader.readAsDataURL(file);
+	}
 </script>
 
 
