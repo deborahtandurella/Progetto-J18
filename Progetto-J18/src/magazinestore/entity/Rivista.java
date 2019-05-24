@@ -40,7 +40,7 @@ public class Rivista implements java.io.Serializable {
 	private String description;
 	private byte[] immagine;
 	private String base64Image;
-	private String price;
+	private float price;
 	private Date publishDate;
 	private Date lastUpdtaedTime;
 	private Set<Recensione> recensiones = new HashSet<Recensione>(0);
@@ -49,7 +49,7 @@ public class Rivista implements java.io.Serializable {
 	public Rivista() {
 	}
 
-	public Rivista(Categoria categoria, String title, String description, byte[] immagine, String price,
+	public Rivista(Categoria categoria, String title, String description, byte[] immagine, float price,
 			Date publishDate, Date lastUpdtaedTime) {
 		this.categoria = categoria;
 		this.title = title;
@@ -60,7 +60,7 @@ public class Rivista implements java.io.Serializable {
 		this.lastUpdtaedTime = lastUpdtaedTime;
 	}
 
-	public Rivista(Categoria categoria, String title,String description, byte[] immagine, String price,
+	public Rivista(Categoria categoria, String title,String description, byte[] immagine, float price,
 			Date publishDate, Date lastUpdtaedTime, Set<Recensione> recensiones, Set<DettagliOrdine> dettagliOrdines) {
 		this.categoria = categoria;
 		this.title = title;
@@ -76,7 +76,7 @@ public class Rivista implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 
-	@Column(name = "revista_id", unique = true, nullable = false)
+	@Column(name = "rivista_id", unique = true, nullable = false)
 	public Integer getRivistaId() {
 		return this.rivistaId;
 	}
@@ -123,11 +123,11 @@ public class Rivista implements java.io.Serializable {
 	}
 
 	@Column(name = "price", nullable = false, length = 45)
-	public String getPrice() {
+	public float getPrice() {
 		return this.price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(float price) {
 		this.price = price;
 	}
 
@@ -168,15 +168,15 @@ public class Rivista implements java.io.Serializable {
 	public void setDettagliOrdines(Set<DettagliOrdine> dettagliOrdines) {
 		this.dettagliOrdines = dettagliOrdines;
 	}
-	/*
-	@Transient
+	
+	@javax.persistence.Transient
 	public String getBase64Image() {
 		this.base64Image = Base64.getEncoder().encodeToString(this.immagine);
 		return base64Image;
 	}
-	@Transient
+	@javax.persistence.Transient
 	public void setBase64Image(String base64) {
 		
 		this.base64Image=base64;
-	}*/
+	}
 }

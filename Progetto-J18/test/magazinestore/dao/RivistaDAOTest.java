@@ -46,7 +46,7 @@ public class RivistaDAOTest extends BaseDAOTest {
 		existRivista.setCategoria(categoria);
 		existRivista.setTitle("Programmazione ad ogetti(2° edizione)");
 		existRivista.setDescription("manuale java");
-		existRivista.setPrice("60");
+		existRivista.setPrice(60);
 		
 		DateFormat dateFormat= new SimpleDateFormat("DD/mm/yyyy");
 		Date publishDate = dateFormat.parse("09/05/2019");
@@ -70,7 +70,7 @@ public class RivistaDAOTest extends BaseDAOTest {
 		newRivista.setCategoria(categoria);
 		newRivista.setTitle("Programmazione java");
 		newRivista.setDescription("manuale java");
-		newRivista.setPrice("40");
+		newRivista.setPrice(40);
 		
 		DateFormat dateFormat= new SimpleDateFormat("DD/mm/yyyy");
 		Date publishDate = dateFormat.parse("09/05/2019");
@@ -95,7 +95,7 @@ public class RivistaDAOTest extends BaseDAOTest {
 		newRivista.setCategoria(categoria);
 		newRivista.setTitle("CALCIO INTERNAZIONALE");
 		newRivista.setDescription("il gioco del calcio");
-		newRivista.setPrice("30");
+		newRivista.setPrice(30);
 		
 		DateFormat dateFormat= new SimpleDateFormat("DD/mm/yyyy");
 		Date publishDate = dateFormat.parse("11/05/2019");

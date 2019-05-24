@@ -35,7 +35,7 @@
     	</c:if>
     	
     	<c:if test="${rivista == null}">
-    		<form action="create_rivista" method="post" id="rivistaForm">
+    		<form action="create_rivista" method="post" id="rivistaForm" enctype="multipart/form-data">
     	</c:if>
     	
 			<table class="form">
@@ -54,16 +54,17 @@
 			    </tr>
       			<tr>
       				<td align="right">Titolo:</td>
-      				<td align="left"><input type="text" id="title" name="email" size="20" value="${rivista.email}"/></td>
+      				<td align="left"><input type="text" id="title" name="title" size="20" value="${rivista.email}"/></td>
       			</tr>
       			<tr>
       				<td align="right">Data di publicazione:</td>
       				<td align="left"><input type="text" id="publishDate" name="publishDate" size="20" value="${rivista.publishDate}"/></td>
       			</tr>
       			<tr>
-      				<td align="right">Rivista Immaggine:</td>
-      				<td align="left"><input type="file" id="RivistaImage" name="RivistaImage" size="20"/><br/>
-      				<img id="thumbnail" alt="Image Preview" style="width:20%;margin-top:10px"/>
+      				<td align="right">Immaggine:</td>
+      				<td align="left">
+      					<input type="file" id="RivistaImage" name="RivistaImage" size="20"/><br/>
+      				<img id="thumbnail" alt="Image Preview" style="width:15%; margin-top:0px"/>
       				</td>
       			</tr>
       				<tr>
@@ -98,35 +99,34 @@
 		$('#RivistaImage').change(function(){
 			showImageThumbnail(this);
 		});
-		$("#userForm").validate({
+		$("#rivistaForm").validate({
 			rules: {
-				email: {
-					required: true,
-					email: true
-				},
-				fullname: "required",
-				password: "required",
+				category: "required",
+				title: "required",
+				publishDate: "required",
+				RivistaImage: "required",
+				price: "required",
+				description: "required",
 			},
 			
-			messages: {
-				email: {
-					required: " Inserisci email",
-					email: " Inserisci indirizzo email valido"
-				},
-				
-				fullname: " Inserisci nome completo",
-				password: " Inserisci password"
+			messages: {		
+				category: " Selezione la Categoria",
+				title: " Inserisci il titolo",
+				publishDate: " Inserisci la data di pubblicazione",
+				RivistaImage: " Inserisci Immagine",
+				price: " Inserisci Prezzo",
+				description: " Inserisci Descrizione"
 			}
 		});
 		$("#buttonCancel").click(function () {
 			history.go(-1);
-		})
+		});
 	});
 	function showImageThumbnail(fileInput){
 		var file = fileInput.files[0];
 		var reader= new FileReader();
 		reader.onload=function(e){
-			$('thumbnail').attr('src',e.target.result);
+			$('#thumbnail').attr('src',e.target.result);
 		};
 		reader.readAsDataURL(file);
 	}

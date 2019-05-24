@@ -36,10 +36,6 @@
                 <th>Ultimo aggiornamento</th>
                 <th>Azioni</th>
             </tr>
-            <%--Per ogni oggetto utente nella collezione creamo una nuova riga di tabella--%>
-            <%--var="user" è il nome della variable usata nel ciclo for
-                items: punta al nome della variabile "listUser" nel request(presente nella classe ListUserServlet)
-                che deve corrispondere al nome che abbiamo specificato come attributo--%>
                 
             <c:forEach var="rivista" items="${listRivista}" varStatus="status">
                 <tr>
@@ -47,8 +43,8 @@
                     <td>${status.index + 1}</td>
                     <td>${rivista.rivistaId}</td>
                     
-                  <td>
-            
+                    <td>
+                   	<img src="data:image/jpg;base64,${rivista.base64Image}" width="84" height="110" /> 
                     </td>
                     <td>${rivista.title}</td>
                     <td>${rivista.categoria.name}</td>
