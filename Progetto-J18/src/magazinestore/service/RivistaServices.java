@@ -64,22 +64,40 @@ public class RivistaServices {
 	}
 
 	public void createRivista() throws ServletException, IOException {
-		Integer categoryId = Integer.parseInt(request.getParameter("category"));
+		
+		
 		String title = request.getParameter("title");
-		String description = request.getParameter("description");
-		float price = Float.parseFloat(request.getParameter("price"));
+		
 		
 		Rivista existRivista = rivistaDAO.findByTitle(title);
-		
 		if (existRivista != null) {
-			String message = "Non Ë possibile creare un nuova rivista perchË il titolo '" 
-							+ title + "' esiste gi‡.";
+			String message = "Non ÔøΩ possibile creare un nuova rivista perchÔøΩ il titolo '" 
+							+ title + "' esiste giÔøΩ.";
 			listRiviste(message);
 			return;
 		}
+		Rivista newRivista= new Rivista();
+		readRivistaFields(newRivista);
 		
+		Rivista createdRivista = rivistaDAO.create(newRivista);
+		
+		
+		if (createdRivista.getRivistaId() > 0) {
+			String message = "Un nuovo libro ÔøΩ stato creato con successo";
+			request.setAttribute("message", message);
+			listRiviste();
+			
+		}
+
+	}
+  public void readRivistaFields(Rivista rivista) throws ServletException, IOException {
+	  String title = request.getParameter("title");
+	  String description = request.getParameter("description");
+		float price = Float.parseFloat(request.getParameter("price"));
+	
 		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 		Date publishDate = null;
+		
 		try {
 			publishDate = dateFormat.parse(request.getParameter("publishDate"));
 		} catch (ParseException e) {
@@ -87,20 +105,17 @@ public class RivistaServices {
 			throw new ServletException("Errore nel formato della data(Deve essere MM/dd/yyyy)");
 		}
 		
-		System.out.println("Categry ID: " + categoryId);
-		System.out.println("title ID: " + title);
-		System.out.println("Description ID: " + description);
-		System.out.println("Price : " +price);
-		System.out.println("publishDate ID: " + publishDate);
+	
 		
-		Rivista newRivista = new Rivista();
-		newRivista.setTitle(title);
-		newRivista.setDescription(description);
-		newRivista.setPrice(price);
-		newRivista.setPublishDate(publishDate);
 		
+		rivista.setTitle(title);
+		rivista.setDescription(description);
+		rivista.setPrice(price);
+		rivista.setPublishDate(publishDate);
+		
+		Integer categoryId = Integer.parseInt(request.getParameter("category"));
 		Categoria category = categoryDAO.get(categoryId);
-		newRivista.setCategoria(category);
+		rivista.setCategoria(category);
 		
 		Part part = request.getPart("RivistaImage");
 		if (part != null && part.getSize() > 0) {
@@ -111,17 +126,61 @@ public class RivistaServices {
 			inputStream.read(imageBytes);
 			inputStream.close();
 			
-			newRivista.setImmagine(imageBytes);
+			rivista.setImmagine(imageBytes);
 		}
+	  
+  }
+	public void editRivista() throws ServletException, IOException {
+		Integer rivistaId= Integer.parseInt(request.getParameter("id"));
+		Rivista rivista=rivistaDAO.get(rivistaId);
+		List<Categoria> listCategory=categoryDAO.listAll();
 		
-		Rivista createdRivista = rivistaDAO.create(newRivista);
+		request.setAttribute("rivista",rivista);
+		request.setAttribute("listCategory",listCategory);
 		
-		if (createdRivista.getRivistaId() > 0) {
-			String message = "Un nuovo libro Ë stato creato con successo";
-			request.setAttribute("message", message);
-			listRiviste();
-			
-		}
+		 String editPage= "rivista_form.jsp";
+		  RequestDispatcher requestDispatcher=request.getRequestDispatcher(editPage);
+		  requestDispatcher.forward(request, response);
+		
+	}
 
+	public void updateRivista() throws ServletException, IOException {
+		Integer rivistaId= Integer.parseInt(request.getParameter("rivistaId"));
+		String title = request.getParameter("title");
+
+		
+		Rivista existRivista = rivistaDAO.get(rivistaId);
+		Rivista rivistaByTitle =rivistaDAO.findByTitle(title);
+		
+		if(!existRivista.equals(rivistaByTitle)) {
+			String message="non √® possibile campiare a questo titolo perch√® gi√† usato da un altra rivista.";
+			listRiviste(message);
+			return;
+		}
+		readRivistaFields(existRivista);
+		rivistaDAO.update(existRivista);
+		String message= "La rivista √® stata aggiornata con successo.";
+		listRiviste(message);
+		
+	}
+
+	public void deleteRivista() throws ServletException, IOException {
+		Integer rivistaId= Integer.parseInt(request.getParameter("id"));
+		rivistaDAO.delete(rivistaId);
+		
+		String message= "La rivista √® stata eliminata.";
+		listRiviste(message);
+	
+	}
+
+	public void listRivistaByCatagory() throws ServletException, IOException {
+		int categoryId =Integer.parseInt(request.getParameter("id"));
+		List<Rivista> listRiviste =rivistaDAO.listByCategory(categoryId);
+		request.setAttribute("listRiviste",listRiviste);
+		
+		 String listPage= "frontend/rivista_list_by_category.jsp";
+		  RequestDispatcher requestDispatcher=request.getRequestDispatcher(listPage);
+		  requestDispatcher.forward(request, response);
+		
 	}
 }

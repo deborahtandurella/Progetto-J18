@@ -31,6 +31,8 @@ import javax.persistence.UniqueConstraint;
 	@NamedQuery(name = "Rivista.findAll", query = "SELECT r FROM Rivista r"),
 	@NamedQuery(name = "Rivista.findByTitle", query = "SELECT r FROM Rivista r where r.title =:title"),
 	@NamedQuery(name = "Rivista.countAll", query = "SELECT COUNT(*) FROM Rivista r"),
+	//@NamedQuery(name="Rivista.findByCategory",query="SELECT b FROM Rivista b JOIN "
+	  //                + "Category c ON b.category.categoryId = c.categoryId AND c.categoryId = :catId")
 })
 public class Rivista implements java.io.Serializable {
 
@@ -42,6 +44,30 @@ public class Rivista implements java.io.Serializable {
 	private String base64Image;
 	private float price;
 	private Date publishDate;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((rivistaId == null) ? 0 : rivistaId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Rivista other = (Rivista) obj;
+		if (rivistaId == null) {
+			if (other.rivistaId != null)
+				return false;
+		} else if (!rivistaId.equals(other.rivistaId))
+			return false;
+		return true;
+	}
 	private Date lastUpdtaedTime;
 	private Set<Recensione> recensiones = new HashSet<Recensione>(0);
 	private Set<DettagliOrdine> dettagliOrdines = new HashSet<DettagliOrdine>(0);

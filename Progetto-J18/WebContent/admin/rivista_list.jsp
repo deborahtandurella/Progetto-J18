@@ -48,7 +48,7 @@
                     </td>
                     <td>${rivista.title}</td>
                     <td>${rivista.categoria.name}</td>
-                    <td>${rivista.price}</td>
+                    <td>$${rivista.price}</td>
                     <td>${rivista.lastUpdtaedTime}</td>
                     <td>
                     	<a href="edit_rivista?id=${rivista.rivistaId}">Modifica</a>
@@ -68,9 +68,9 @@
 		$(document).ready(function () {
 			$(".deleteLink").each(function () {
 				$(this).on("click", function () {
-					userId= $(this).attr("id");
-					if(confirm("Sei sicuro di eliminare utente con ID: " + userId + "?"))	{
-						window.location = 'delete_user?id=' + userId;
+					rivistaId= $(this).attr("id");
+					if(confirm("Sei sicuro di eliminare qusta rivista: " + rivistaId + "?"))	{
+						window.location = 'delete_rivista?id=' + rivistaId;
 					}	
 				});		
 			});

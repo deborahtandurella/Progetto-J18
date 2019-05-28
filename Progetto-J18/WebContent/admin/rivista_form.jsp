@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+  
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,8 +32,9 @@
 
     <div align="center">
     	<c:if test="${rivista != null}">
-    		<form action="update_user" method="post" id="userForm">
-    		<input type="hidden" name="userId" value="${rivista.userId}">
+    		<form action="update_rivista" method="post" id="rivistaForm"  enctype="multipart/form-data">
+    		<input type="hidden" name="rivistaId" value="${rivista.rivistaId}">
+    		
     	</c:if>
     	
     	<c:if test="${rivista == null}">
@@ -45,7 +48,12 @@
 			  	
 			  	 <select name="category">
 			  		 <c:forEach items="${listCategory}" var="category">
-			  			 <option value="${category.categoriaId}">
+			  		 <c:if test="${category.categoriaId eq rivista.categoria.categoriaId}">
+			  		 	 <option value="${category.categoriaId}"selected>
+			  		 </c:if>
+			  		 <c:if test="${category.categoriaId ne rivista.categoria.categoriaId}">
+			  		  <option value="${category.categoriaId}">
+			  		 </c:if>
 			  	 			${category.name}
 			  	 		</option>
 			  	 	</c:forEach>
@@ -54,17 +62,20 @@
 			    </tr>
       			<tr>
       				<td align="right">Titolo:</td>
-      				<td align="left"><input type="text" id="title" name="title" size="20" value="${rivista.email}"/></td>
+      				<td align="left"><input type="text" id="title" name="title" size="20" value="${rivista.title}"/></td>
       			</tr>
       			<tr>
       				<td align="right">Data di publicazione:</td>
-      				<td align="left"><input type="text" id="publishDate" name="publishDate" size="20" value="${rivista.publishDate}"/></td>
+      				<td align="left"><input type="text" id="publishDate" name="publishDate" size="20" 
+      				    value="<fmt:formatDate  pattern ='MM/dd/yyyy' value='${Rivista.publishDate }'/> "/></td>
       			</tr>
       			<tr>
       				<td align="right">Immaggine:</td>
       				<td align="left">
       					<input type="file" id="RivistaImage" name="RivistaImage" size="20"/><br/>
-      				<img id="thumbnail" alt="Image Preview" style="width:15%; margin-top:0px"/>
+      				<img id="thumbnail" alt="Image Preview" style="width:15%; margin-top:0px"
+      				src="data:image/jpg;base64,${rivista.base64Image}"
+      				/>
       				</td>
       			</tr>
       				<tr>
@@ -74,7 +85,7 @@
       			<tr>
       				<td align="right">Descrizione:</td>
       				<td align="left">
-      				<textarea rows="5" cols="50"name="description" id="description"></textarea>
+      				<textarea rows="5" cols="50"name="description" id="description">${rivista.description}</textarea>
       				</td>
       			</tr>
       			
@@ -104,7 +115,10 @@
 				category: "required",
 				title: "required",
 				publishDate: "required",
+				
+				<c:if test="${rivista == null}">
 				RivistaImage: "required",
+				</c:if>
 				price: "required",
 				description: "required",
 			},

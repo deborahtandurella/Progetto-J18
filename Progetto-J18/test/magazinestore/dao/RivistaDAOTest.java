@@ -1,6 +1,6 @@
 package magazinestore.dao;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.*; 
 import static org.junit.Assume.assumeTrue;
 
 import java.io.IOException;
@@ -44,7 +44,7 @@ public class RivistaDAOTest extends BaseDAOTest {
 		categoria.setCategoriaId(15);
 		
 		existRivista.setCategoria(categoria);
-		existRivista.setTitle("Programmazione ad ogetti(2° edizione)");
+		existRivista.setTitle("Programmazione ad ogetti(2ï¿½ edizione)");
 		existRivista.setDescription("manuale java");
 		existRivista.setPrice(60);
 		
@@ -57,7 +57,7 @@ public class RivistaDAOTest extends BaseDAOTest {
 		existRivista.setImmagine(imageBytes);
 		
 		Rivista updatedRivista =rivistaDao.update(existRivista);
-		assertEquals(updatedRivista.getTitle(),"Programmazione ad ogetti(2° edizione)");
+		assertEquals(updatedRivista.getTitle(),"Programmazione ad ogetti(2ï¿½ edizione)");
 		
 	}
 
@@ -65,7 +65,7 @@ public class RivistaDAOTest extends BaseDAOTest {
 	public void testCreateRivista() throws ParseException, IOException {
 		Rivista newRivista = new Rivista();
 		Categoria categoria= new Categoria("Programmazione");
-		categoria.setCategoriaId(14);
+		categoria.setCategoriaId(15);
 		
 		newRivista.setCategoria(categoria);
 		newRivista.setTitle("Programmazione java");
@@ -76,7 +76,7 @@ public class RivistaDAOTest extends BaseDAOTest {
 		Date publishDate = dateFormat.parse("09/05/2019");
 		newRivista.setPublishDate(publishDate);
 		
-		String imagePath="C:\\Users\\USER\\Desktop\\ProgettoJ18\\Progetto-J18\\Progetto-J18\\image\\java.jpg";
+		String imagePath="/Users/ahmedemad/Desktop/Progetto-J18/Progetto-J18/image/java.jpg";
 		byte[] imageBytes=Files.readAllBytes(Paths.get(imagePath));
 		newRivista.setImmagine(imageBytes);
 		
@@ -101,7 +101,7 @@ public class RivistaDAOTest extends BaseDAOTest {
 		Date publishDate = dateFormat.parse("11/05/2019");
 		newRivista.setPublishDate(publishDate);
 		
-		String imagePath="C:\\Users\\USER\\Desktop\\ProgettoJ18\\Progetto-J18\\Progetto-J18\\image\\java.jpg";
+		String imagePath="/Users/ahmedemad/Desktop/Progetto-J18/Progetto-J18/image/java.jpg";
 		byte[] imageBytes=Files.readAllBytes(Paths.get(imagePath));
 		newRivista.setImmagine(imageBytes);
 		
@@ -169,4 +169,14 @@ public class RivistaDAOTest extends BaseDAOTest {
 	long totalRiviste=rivistaDao.count();
 	assertEquals(2,totalRiviste);
  }
+
+@Test
+public void testListByCategory() {
+int categoryId=1;
+
+List<Rivista> listRiviste= rivistaDao.listByCategory(categoryId);
+
+assertTrue(listRiviste.size() > 0);}
+	
+
 }

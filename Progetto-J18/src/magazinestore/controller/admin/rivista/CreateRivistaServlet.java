@@ -19,6 +19,7 @@ public class CreateRivistaServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 
     public CreateRivistaServlet() {
+    	
     }
 
 
