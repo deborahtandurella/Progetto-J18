@@ -1,22 +1,22 @@
 package magazinestore.controller.admin.user;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import magazinestore.controller.BaseServlet;
 import magazinestore.service.UserServices;
 
 @WebServlet("/admin/create_user")
-public class CreateUserServlet extends BaseServlet {
+public class CreateUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		UserServices userService = new UserServices(entityManager, request, response);
+		UserServices userService = new UserServices(request, response);
 		userService.createUser();
 		
 	}

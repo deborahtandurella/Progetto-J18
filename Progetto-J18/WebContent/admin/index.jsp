@@ -21,7 +21,7 @@
         <hr width="60%"/>
         <h2 class="pageheading">Quick Actions:</h2>
         <b>
-        <a href="">Nuovo Libro</a> &nbsp;
+        <a href="">Nuova Rivista</a> &nbsp;
         <a href="create_user">Nuovo Utente</a> &nbsp;
         <a href="create_category">Nuova Categoria</a> &nbsp;
         <a href="create_customer">Nuovo Cliente</a> &nbsp;

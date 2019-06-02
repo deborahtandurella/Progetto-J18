@@ -9,8 +9,7 @@ import magazinestore.entity.Utenti;
 
 public class CategoryDAO extends JpaDAO<Categoria> implements GenericDAO<Categoria> {
 
-	public CategoryDAO(EntityManager entityManager) {
-		super(entityManager);
+	public CategoryDAO() {
 	}
 
 	@Override

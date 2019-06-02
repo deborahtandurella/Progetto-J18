@@ -1,12 +1,14 @@
 package magazinestore.controller.admin.rivista;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import magazinestore.controller.BaseServlet;
+
 import magazinestore.service.RivistaServices;
 
 @WebServlet("/admin/create_rivista")
@@ -15,7 +17,7 @@ import magazinestore.service.RivistaServices;
 			maxFileSize = 1024 * 300,	// 300 KB
 			maxRequestSize = 1024 * 1024	// 1 MB
 		)
-public class CreateRivistaServlet extends BaseServlet {
+public class CreateRivistaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     public CreateRivistaServlet() {
@@ -24,7 +26,7 @@ public class CreateRivistaServlet extends BaseServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RivistaServices rivistaServices = new RivistaServices(entityManager, request, response);
+		RivistaServices rivistaServices = new RivistaServices( request, response);
 		rivistaServices.createRivista();
 	}
 

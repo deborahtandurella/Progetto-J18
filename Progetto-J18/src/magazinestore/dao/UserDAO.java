@@ -9,8 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class UserDAO extends JpaDAO<Utenti> implements GenericDAO<Utenti> {
-    public UserDAO(EntityManager entityManager) {
-        super(entityManager);
+    public UserDAO() {
     }
 
     @Override

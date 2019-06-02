@@ -1,28 +1,46 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: alael
-  Date: 24/04/2019
-  Time: 22:56
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <html>
 <head>
-    <title>Riviste Online</title>
+<title>Riviste Online</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-   <jsp:directive.include file="header.jsp" />
+	<jsp:directive.include file="header.jsp" />
 
-   <div align="center">
-       <br><br>
-       <h3>This is main content: </h3>
-       <h2>New books:</h2>
-       <h2>best-selling books:</h2>
-       <h2>Most-favored books:</h2>
-       <br><br>
-   </div>
+	<div class="center">
+		<div>
+			<h2>Nuove Riviste:</h2>
+			<c:forEach items="${listNewRiviste}" var="rivista">
+				<div class="rivista">
+					<div>
+						<a  href="view_rivista?id=${rivista.rivistaId }">
+						 <img class="rivista-small"
+							src="data:image/jpg;base64,${rivista.base64Image}"/>
+						</a>
+					</div>
+					<div>
+						<a href="view_rivista?id=${rivista.rivistaId }"> <b>${rivista.title }</b>
+						</a>
+					</div>
+					<div>Rating *****</div>
+					<div>
+						<b>$ ${rivista.price}</b>
+					</div>
+				</div>
 
-    <jsp:directive.include file="footer.jsp" />
+			</c:forEach>
+
+		</div>
+		<div class="next-row">
+			<h2>best-selling Riviste:</h2>
+		</div>
+		<div  class="next-row">
+			<h2>Most-favored Riviste:</h2>
+		</div>
+		<br/><br/>
+	</div>
+
+	<jsp:directive.include file="footer.jsp" />
 </body>
 </html>
 

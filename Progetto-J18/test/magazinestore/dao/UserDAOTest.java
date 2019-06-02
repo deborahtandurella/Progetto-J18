@@ -12,23 +12,22 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class UserDAOTest extends BaseDAOTest{
+public class UserDAOTest{
 
     private static UserDAO userDAO;
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        BaseDAOTest.setUpBeforeClass();
-        userDAO = new UserDAO(entityManager);
+        userDAO = new UserDAO();
     }
 
     /**Create user's tests*/
     @Test
     public void testCreateUser() {
         Utenti utente1 = new Utenti();
-        utente1.setEmail("iin@outlook.it");
-        utente1.setFullName("jnjinijt");
-        utente1.setPassword("12345");
+        utente1.setEmail("omar@gmail.it");
+        utente1.setFullName("omar");
+        utente1.setPassword("1234");
 
         utente1 = userDAO.create(utente1);
         assertTrue(utente1.getUserId() > 0);
@@ -131,6 +130,5 @@ public class UserDAOTest extends BaseDAOTest{
     
     @AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		BaseDAOTest.tearDownAfterClass();
 	}
 }

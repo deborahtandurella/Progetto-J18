@@ -1,16 +1,17 @@
 package magazinestore.entity;
 // Generated 27-apr-2019 19.55.30 by Hibernate Tools 5.2.12.Final
 
-import java.beans.Transient;
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.Base64;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -29,11 +30,18 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "rivista", catalog = "magazinestoredb", uniqueConstraints = @UniqueConstraint(columnNames = "title"))
 @NamedQueries({
 	@NamedQuery(name = "Rivista.findAll", query = "SELECT r FROM Rivista r"),
-	@NamedQuery(name = "Rivista.findByTitle", query = "SELECT r FROM Rivista r where r.title =:title"),
+	@NamedQuery(name = "Rivista.findByTitle", query = "SELECT r FROM Rivista r WHERE r.title =:title"),
 	@NamedQuery(name = "Rivista.countAll", query = "SELECT COUNT(*) FROM Rivista r"),
-	//@NamedQuery(name="Rivista.findByCategory",query="SELECT b FROM Rivista b JOIN "
-	  //                + "Category c ON b.category.categoryId = c.categoryId AND c.categoryId = :catId")
+	@NamedQuery(name = "Rivista.countByCategory", query = "SELECT COUNT(r) FROM Rivista r "
+						+ "WHERE r.categoria.categoriaId =:catId"),
+	@NamedQuery(name="Rivista.findByCategory",query="SELECT b FROM Rivista b JOIN "
+	                  + "Categoria c ON b.categoria.categoriaId = c.categoriaId AND c.categoriaId = :catId"),
+	@NamedQuery(name="Rivista.listNew", query= "SELECT b FROM Rivista b ORDER BY b.publishDate DESC"),
+	@NamedQuery(name="Rivista.search", query="SELECT b FROM Rivista b WHERE b.title LIKE '%' || :keyword || '%'"
+			+ "OR b.description LIKE '%' || :keyword || '%'")
+
 })
+
 public class Rivista implements java.io.Serializable {
 
 	private Integer rivistaId;
@@ -111,7 +119,7 @@ public class Rivista implements java.io.Serializable {
 		this.rivistaId = rivistaId;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "categoria_id", nullable = false)
 	public Categoria getCategoria() {
 		return this.categoria;

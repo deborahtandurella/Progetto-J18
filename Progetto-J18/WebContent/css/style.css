@@ -54,6 +54,8 @@ th {
 table.form {
 	border: 0;
 	padding: 4px;
+	width:80%;
+	margin:0 auto;
 }
 
 button {
@@ -89,6 +91,61 @@ input {
 }
 
 
+div.center{
+	text-align:center;
+}
+div.rivista{
+	display: inline-block;
+	margin:20px;
+	text-align:center;
+}
+table.rivista{
+	width=80%;
+	border:0;
+	margin:0 auto;
+}
 
+div.rivista_group{
+	style="width:80%; 
+	margin:0 auto;
+}
+div.next-row{
+	clear:both;
+}
+img.rivista-small{
+	width:120px;
+	height:164px;
+}
+img.rivista-large{
+	width:240px;
+	height:300px;
+}
 
+#rivista-title{
+	font-size:x-large;
+	font-weight:bold;
+}
+#description{
+	text-align:justify;
+	vertical-align:top;
+}
+
+#search-img{
+	display: inline-block; 
+	margin: 20px; 
+	width:10%;
+}
+
+#search-description{
+	display: inline-block; 
+	margin: 20px; 
+	vertical-align:top; 
+	width:50%;
+	text-align:left;
+}
+#search-price{
+	display: inline-block; 
+	margin: 20px; 
+	vertical-align:top;
+}
 

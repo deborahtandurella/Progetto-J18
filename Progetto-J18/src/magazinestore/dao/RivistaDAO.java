@@ -6,14 +6,13 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import magazinestore.entity.Rivista;
 
 public class RivistaDAO extends JpaDAO<Rivista> implements GenericDAO<Rivista> {
 
-	public RivistaDAO(EntityManager entityManager) {
-		super(entityManager);
-		// TODO Auto-generated constructor stub
+	public RivistaDAO() {
 	}
 
 	@Override
@@ -59,6 +58,22 @@ public class RivistaDAO extends JpaDAO<Rivista> implements GenericDAO<Rivista> {
 		
 		return super.countWithNamedQuery("Rivista.countAll");
 	}
+	public List<Rivista> listNewRiviste (){
+		return super.findWithNamedQuery("Rivista.listNew",0,4);
+		
+	}
+
+	public List<Rivista> listByCategory(int categoryId) {
+		return super.findWithNamedQuery("Rivista.findByCategory","catId",categoryId);
+	}
 	
+	public List<Rivista> search(String keyword){
+		return super.findWithNamedQuery("Rivista.search","keyword",keyword);
+		
+	}
+	
+	public long countByCategory(int categoryId) {
+		return super.countWithNamedQuery("Rivista.countByCategory","catId",categoryId);
+	}
 
 }
