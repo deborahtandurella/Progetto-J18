@@ -21,18 +21,16 @@ import org.junit.Test;
 import magazinestore.entity.Categoria;
 import magazinestore.entity.Rivista;
 
-public class RivistaDAOTest extends BaseDAOTest {
+public class RivistaDAOTest {
     private static RivistaDAO rivistaDao;
     
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		BaseDAOTest.setUpBeforeClass();
 		rivistaDao = new RivistaDAO();
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		BaseDAOTest.tearDownAfterClass();
 	}
 	
 	@Test
@@ -93,15 +91,15 @@ public class RivistaDAOTest extends BaseDAOTest {
 		categoria.setCategoriaId(15);
 		
 		newRivista.setCategoria(categoria);
-		newRivista.setTitle("CALCIO INTERNAZIONALE");
-		newRivista.setDescription("il gioco del calcio");
+		newRivista.setTitle("Pallavolo INTERNAZIONALE");
+		newRivista.setDescription("il gioco del pallavolo");
 		newRivista.setPrice(30);
 		
 		DateFormat dateFormat= new SimpleDateFormat("DD/mm/yyyy");
 		Date publishDate = dateFormat.parse("11/05/2019");
 		newRivista.setPublishDate(publishDate);
 		
-		String imagePath="/Users/ahmedemad/Desktop/Progetto-J18/Progetto-J18/image/java.jpg";
+		String imagePath="/Users/alael/OneDrive/Immagini/pallavolo.jpg";
 		byte[] imageBytes=Files.readAllBytes(Paths.get(imagePath));
 		newRivista.setImmagine(imageBytes);
 		

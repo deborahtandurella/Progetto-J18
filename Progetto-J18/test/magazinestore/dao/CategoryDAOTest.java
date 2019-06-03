@@ -14,19 +14,17 @@ import org.junit.Test;
 
 import magazinestore.entity.Categoria;
 
-public class CategoryDAOTest extends BaseDAOTest{
+public class CategoryDAOTest {
     
     private static CategoryDAO categoryDAO;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		BaseDAOTest.setUpBeforeClass();
         categoryDAO = new CategoryDAO();
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		BaseDAOTest.tearDownAfterClass();
 	}
 
 	@Test

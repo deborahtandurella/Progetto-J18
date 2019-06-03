@@ -1,13 +1,18 @@
 package magazinestore.entity;
 // Generated 27-apr-2019 19.55.30 by Hibernate Tools 5.2.12.Final
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -19,6 +24,11 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "cliente", catalog = "magazinestoredb", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+@NamedQueries({
+	@NamedQuery(name = "Cliente.findAll", query = "SELECT c FROM Cliente c ORDER BY c.registerDate DESC"),
+	@NamedQuery(name = "Cliente.findByEmail", query = "SELECT c FROM Cliente c WHERE c.email = :email"),
+	@NamedQuery(name = "Cliente.countAll", query = "SELECT COUNT(c.email)FROM Cliente c")
+})
 public class Cliente implements java.io.Serializable {
 
 	private int clienteId;
@@ -69,7 +79,7 @@ public class Cliente implements java.io.Serializable {
 	}
 
 	@Id
-
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "cliente_id", unique = true, nullable = false)
 	public int getClienteId() {
 		return this.clienteId;
