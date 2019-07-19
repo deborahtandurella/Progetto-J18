@@ -6,5 +6,5 @@
   To change this template use File | Settings | File Templates.
 --%>
 <div align="center">
-    Copyright(C) 2019 by Magazine Online Store
+  Copyright(C) 2019 by <b>Riviste Online</b>
 </div>
